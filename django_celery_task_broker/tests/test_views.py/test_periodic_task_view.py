@@ -13,8 +13,8 @@ class PeriodicTaskAPIViewTest(APITestCase):
 
     def setUp(self):
         self.company_account = 'http://gateway:8000/api/account/1000/'
-        self.module_name = 'answers.tasks'
-        self.task_name = 'active_withheld_answer'
+        self.module_name = 'project.celery'
+        self.task_name = 'example_task'
         self.display_name = 'Test Dynamic Create Periodic Task'
         self.kwargs = {'company_account': self.company_account}
         self.url = reverse('periodic_task')
