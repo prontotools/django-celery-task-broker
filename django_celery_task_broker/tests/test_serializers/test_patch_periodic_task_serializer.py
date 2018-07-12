@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from django_celery_task_broker.serializers import PatchPeriodicTaskSerializer
+from django_celery_task_broker.serializers import TogglePeriodicTaskSerializer
 
 
-class PatchPeriodicTaskSerializerTest(TestCase):
+class TogglePeriodicTaskSerializerTest(TestCase):
 
     def setUp(self):
         self.company_account = 'http://gateway:8000/api/account/1000/'
@@ -11,7 +11,7 @@ class PatchPeriodicTaskSerializerTest(TestCase):
         self.task_name = 'example_task'
         self.kwargs = {'company_account': self.company_account}
 
-        self.serializer = PatchPeriodicTaskSerializer
+        self.serializer = TogglePeriodicTaskSerializer
 
     def test_serializer_should_return_defined_fields(self):
         data = {

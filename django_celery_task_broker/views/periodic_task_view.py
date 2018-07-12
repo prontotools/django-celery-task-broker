@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django_celery_task_broker.serializers import TriggerPeriodicTaskSerializer, PatchPeriodicTaskSerializer
+from django_celery_task_broker.serializers import TriggerPeriodicTaskSerializer, TogglePeriodicTaskSerializer
 from django_celery_task_broker.utils import combine_task_path, is_task_exist
 
 
@@ -38,7 +38,7 @@ class PeriodicTaskView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'detail': 'Invalid Task'})
 
     def patch(self, request):
-        serializer = PatchPeriodicTaskSerializer(data=request.data)
+        serializer = TogglePeriodicTaskSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.data
 
