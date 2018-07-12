@@ -9,6 +9,9 @@ name = "pypi"
 
 django-celery-beat = "1.1.1"
 djangorestframework = "3.6.3"
+pip = "*"
+django-extensions = "*"
+ipython = "*"
 
 
 [dev-packages]
