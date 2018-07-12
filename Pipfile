@@ -1,0 +1,22 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+django-celery-beat = "1.1.1"
+djangorestframework = "3.6.3"
+pip = "*"
+django-extensions = "*"
+ipython = "*"
+
+
+[dev-packages]
+
+pytest = "*"
+django = "*"
+pytest-django = "*"
+model-mommy = "*"

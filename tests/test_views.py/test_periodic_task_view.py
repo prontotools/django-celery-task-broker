@@ -13,8 +13,8 @@ class PeriodicTaskAPIViewTest(APITestCase):
 
     def setUp(self):
         self.company_account = 'http://gateway:8000/api/account/1000/'
-        self.module_name = 'project.celery'
-        self.task_name = 'example_task'
+        self.module_name = 'answers.tasks'
+        self.task_name = 'active_withheld_answer'
         self.display_name = 'Test Dynamic Create Periodic Task'
         self.kwargs = {'company_account': self.company_account}
         self.url = reverse('periodic_task')
@@ -72,58 +72,3 @@ class PeriodicTaskAPIViewTest(APITestCase):
         self.assertEqual(task.kwargs, json.dumps(self.kwargs))
         self.assertEqual(actual.status_code, status.HTTP_200_OK)
         self.assertDictEqual(actual.json(), {'detail': message})
-
-    def test_patch_view_should_update_periodic_task_and_return_status_200_with_message(self):
-        data = {
-            'module_name': self.module_name,
-            'task_name': self.task_name,
-            'kwargs': self.kwargs,
-            'enabled': False
-        }
-        message = 'Updated: Enabled: False: Test Dynamic Create Periodic Task: 0 3 * * * (m/h/d/dM/MY)'
-
-        self.client.post(
-            self.url,
-            data=self.data,
-            format='json'
-        )
-
-        actual = self.client.patch(
-            self.url,
-            data=data,
-            format='json'
-        )
-
-        task = PeriodicTask.objects.last()
-
-        self.assertEqual(task.crontab, self.schedule)
-        self.assertFalse(task.enabled)
-        self.assertEqual(task.task, combine_task_path(self.module_name, self.task_name))
-        self.assertEqual(task.kwargs, json.dumps(self.kwargs))
-        self.assertEqual(actual.status_code, status.HTTP_200_OK)
-        self.assertDictEqual(actual.json(), {'detail': message})
-
-    def test_patch_view_with_invalid_data_should_not_update_periodic_task_and_return_status_404_with_message(self):
-        data = {
-            'module_name': self.module_name,
-            'task_name': self.task_name,
-            'kwargs': {},
-            'enabled': False
-        }
-
-        self.client.post(
-            self.url,
-            data=self.data,
-            format='json'
-        )
-
-        actual = self.client.patch(
-            self.url,
-            data=data,
-            format='json'
-        )
-
-        task = PeriodicTask.objects.last()
-
-        self.assertEqual(actual.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertDictEqual(actual.json(), {'detail': 'Not found.'})

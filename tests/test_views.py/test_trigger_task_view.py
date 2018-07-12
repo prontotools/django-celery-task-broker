@@ -9,8 +9,8 @@ from rest_framework.test import APITestCase
 class TriggerTaskViewAPIViewTest(APITestCase):
 
     def setUp(self):
-        self.module_name = 'project.celery'
-        self.task_name = 'example_task'
+        self.module_name = 'answers.tasks'
+        self.task_name = 'active_withheld_answer'
         self.company_account = 'http://gateway:8000/api/account/1000/'
         self.kwargs = {'company_account': self.company_account}
         self.url = reverse('trigger_task')
@@ -21,7 +21,7 @@ class TriggerTaskViewAPIViewTest(APITestCase):
             'task_name': self.task_name,
             'kwargs': self.kwargs
         }
-        with patch('project.celery.example_task.apply_async') as mock_task:
+        with patch('answers.tasks.active_withheld_answer.apply_async') as mock_task:
             self.client.post(path=self.url, data=data, format='json')
 
         mock_task.assert_called_once_with(kwargs=self.kwargs)

@@ -10,6 +10,13 @@ class TriggerPeriodicTaskSerializer(serializers.Serializer):
     cron_id = serializers.CharField(required=True)
 
 
+class PatchPeriodicTaskSerializer(serializers.Serializer):
+    module_name = serializers.CharField(required=True)
+    task_name = serializers.CharField(required=True)
+    kwargs = serializers.JSONField(required=True)
+    enabled = serializers.BooleanField(required=True)
+
+
 class TriggerTaskSerializer(serializers.Serializer):
     module_name = serializers.CharField(required=True)
     task_name = serializers.CharField(required=True)

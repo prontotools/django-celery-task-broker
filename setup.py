@@ -6,12 +6,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-celery-task-broker',
-    version='0.3.0',
+    version='0.4.0',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
     description='A dynamic Django celery task broker',
-    url='https://github.com/lifez/django-celery-task-broker',
+    url='https://github.com/prontotools/django-celery-task-broker',
     author='Prontotools',
     author_email='prontotools@prontomarketing.com',
     classifiers=[
