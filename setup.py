@@ -11,7 +11,7 @@ setup(
     include_package_data=True,
     license='MIT License',
     description='A dynamic Django celery task broker',
-    url='https://github.com/lifez/django-celery-task-broker',
+    url='https://github.com/prontotools/django-celery-task-broker',
     author='Prontotools',
     author_email='prontotools@prontomarketing.com',
     classifiers=[
